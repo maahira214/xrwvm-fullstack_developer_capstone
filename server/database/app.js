@@ -102,4 +102,15 @@ app.post('/insert_review', express.raw({ type: '*/*' }), async (req, res) => {
   });
 
   try {
-    const savedReview = await
+    const savedReview = await review.save();
+    res.json(savedReview);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'Error inserting review' });
+  }
+});
+
+// Start the Express server
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
+});
